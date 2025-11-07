@@ -1,0 +1,355 @@
+/* =========================
+   THEME
+   ========================= */
+:root {
+  --bg-color: #E3E1DD;        /* stone gray-beige */
+  --text-color: #2C2C2C;      /* charcoal */
+  --accent-color: #2A6F4E;    /* Cal Poly Green */
+  --h1-color: #1E3A5F;        /* Delft Blue */
+  --h2-color: #40505A;        /* muted blue-gray */
+  --secondary-color: #8E8C84; /* Cinerious */
+  --panel-bg: #D0CEC9;        /* header/footer bg */
+  --line-soft: #C8C6C1;       /* soft divider */
+
+  --shadow-soft: 0 6px 18px rgba(0,0,0,.08);
+  --shadow-softer: 0 2px 10px rgba(0,0,0,.06);
+  --radius: 12px;
+  --radius-sm: 8px;
+  --speed: 220ms;
+  --easing: cubic-bezier(.2,.8,.2,1);
+}
+
+/* =========================
+   BASE
+   ========================= */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  background: radial-gradient(1200px 800px at 50% -10%, #EEECE8 0%, var(--bg-color) 60%);
+  color: var(--text-color);
+  font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+  line-height: 1.65;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img { max-width: 100%; display: block; }
+
+h1, h2 { margin: 0; line-height: 1.2; }
+
+::selection {
+  background: rgba(42, 111, 78, .18); /* soft green */
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
+
+/* =========================
+   CONTAINERS
+   ========================= */
+.container { width: min(1100px, 92%); margin: 0 auto; }
+.container-narrow { width: min(900px, 92%); margin: 0 auto; }
+
+/* =========================
+   HEADER + NAV
+   ========================= */
+header {
+  background: linear-gradient(180deg, rgba(208,206,201,.75), rgba(208,206,201,.9));
+  border-bottom: 1px solid var(--secondary-color);
+  padding: 22px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: saturate(120%) blur(6px);
+}
+
+h1 {
+  color: var(--h1-color);
+  font-weight: 700;
+  letter-spacing: .4px;
+  text-align: center;
+  font-size: clamp(1.7rem, 2.6vw, 2.1rem);
+  text-shadow: 0 1px 0 rgba(255,255,255,.25);
+}
+
+nav {
+  display: flex;
+  gap: 26px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Elegant underline animation + focus style */
+nav a {
+  position: relative;
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  outline: none;
+  caret-color: transparent;
+  padding: 2px 0;
+  transition: color var(--speed) var(--easing);
+}
+
+nav a::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -4px;
+  height: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform var(--speed) var(--easing);
+  opacity: .9;
+}
+
+nav a:hover::after { transform: scaleX(1); }
+
+/* Keyboard focus — accessible and pretty */
+nav a:focus-visible {
+  outline: 2px solid rgba(42,111,78,.35);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Optional active page style: add class="active" to current link */
+nav a.active { color: #1E3A5F; }
+nav a.active::after { transform: scaleX(1); }
+
+/* Divider below the header */
+.menu-divider {
+  border: 0;
+  height: 1px;
+  background: var(--line-soft);
+  width: min(1100px, 92%);
+  margin: 6px auto 22px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.6);
+}
+
+/* =========================
+   HOME PAGE
+   ========================= */
+/* replace the old combined rule with: */
+main > .lead,
+.posts {
+  width: min(1100px, 92%);
+  /* no margin here for .lead */
+}
+
+/* now this will take effect */
+.lead {
+  color: var(--h2-color);
+  font-size: 1.05rem;
+  text-align: center;
+  margin: 10px auto 30px; /* more space above & below */
+  font-style: italic;
+  letter-spacing: 0.3px;
+  width: min(700px, 90%);
+}
+
+
+/* Single post card area (one item for now) */
+.posts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  width: min(1100px, 92%);
+  margin: 0 auto 80px; /* adds more space before footer */
+
+}
+
+/* Make the whole card clickable */
+.post-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+/* Card */
+.post {
+  background: var(--panel-bg);
+  border: 1px solid var(--secondary-color);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-softer);
+  transition: transform var(--speed) var(--easing), box-shadow var(--speed) var(--easing);
+  will-change: transform;
+}
+
+/* Image gets consistent shape */
+.post img {
+  width: 100%;
+  aspect-ratio: 4 / 3; /* makes each post shorter */
+  object-fit: cover;
+  display: block;
+
+}
+
+/* Content */
+.post .content { padding: 10px 12px 12px;}
+
+.post h2 {
+  margin: 0 0 6px;
+  color: var(--h2-color);
+  font-size: 1rem;
+  letter-spacing: .2px;
+}
+
+.post p { margin: 0; font-size: 0.9rem;}
+
+.post-meta {
+  color: var(--secondary-color);
+  font-size: 0.9rem;
+  margin: 4px 0 10px;
+  letter-spacing: 0.2px;
+}
+
+
+/* Hover lift (only on devices that support hover) */
+@media (hover: hover) and (pointer: fine) {
+  .post-link:hover .post {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-soft);
+  }
+}
+
+/* =========================
+   FULL POST PAGE
+   ========================= */
+.post-page { width: min(900px, 92%); margin: 0 auto 40px; }
+
+.post-full h2 {
+  color: var(--h2-color);
+  font-size: clamp(1.35rem, 2.2vw, 1.6rem);
+  margin: 6px 0 6px;
+  letter-spacing: .2px;
+}
+
+.post-meta {
+  color: var(--secondary-color);
+  margin: 0 0 14px;
+  font-size: 0.95rem;
+}
+
+.post-hero { margin: 16px 0 12px; }
+.post-hero img {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--secondary-color);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-softer);
+}
+.post-hero figcaption {
+  color: var(--secondary-color);
+  font-size: 0.9rem;
+  margin-top: 8px;
+}
+
+.post-body p { margin: 0 0 14px; }
+
+/* Back link */
+.post-back { margin-top: 18px; }
+.post-back a {
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: .2px;
+}
+
+/* =========================
+   POST PAGE GALLERY (5–10 photos)
+   ========================= */
+
+/* optional: a bit more breathing room around the full post */
+.post-page {
+  margin: 40px auto 60px;
+}
+
+/* grid of photos: 2 per row on desktop */
+.post-gallery {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* two side by side */
+  gap: 16px;
+  justify-items: center;
+}
+
+.post-gallery img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: var(--shadow-softer);
+  transition: transform 0.25s ease;
+}
+
+/* small hover lift on bigger screens */
+@media (hover: hover) and (pointer: fine) {
+  .post-gallery img:hover {
+    transform: scale(1.02);
+  }
+}
+
+/* on small screens: stack one per row */
+@media (max-width: 700px) {
+  .post-gallery {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* =========================
+   FOOTER
+   ========================= */
+footer {
+  background: var(--panel-bg);
+  border-top: 1px solid var(--secondary-color);
+  color: var(--secondary-color);
+  text-align: center;
+  padding: 22px 12px;
+  font-size: .95rem;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.45);
+}
+
+.footer-links {
+  margin-top: 8px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.footer-links a {
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+@media (max-width: 720px) {
+  nav { gap: 18px; }
+  .post .content { padding: 12px 14px 14px; }
+}
+
+@media (min-width: 721px) {
+  /* when you add more posts, you can switch to a grid like this:
+  .posts { grid-template-columns: repeat( auto-fit, minmax(280px, 1fr) ); gap: 22px; }
+  */
+}
