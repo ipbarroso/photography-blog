@@ -10,8 +10,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="style.css">
+  <script defer src="app.js"></script>
+
 </head>
 <body>
   <!-- Header -->
@@ -29,23 +30,52 @@
   <!-- Divider -->
   <hr class="menu-divider"/>
 
-  <!-- Main -->
-  <main>
+   <!-- POSTS -->
     <p class="lead">A space that I can share my days and trips trough my lenses. </p>
+<section class="posts-section" aria-label="Recent posts">
+  <div class="posts-grid">
 
-    <section class="posts" aria-label="Latest posts">
-            <!-- ONE clickable post -->
-        <a class="post-link" href="post1.html" aria-label="Read full post: Morning light in the trees">
-            <article class="post">
-            <img src="imgs/post1imgs/LettucePark.JPG" alt="My First Post">
-            <div class="content">
-                <h2>My First Post!</h2>
-                <p class="post-meta">November 6, 2025 · Lettuce Lake Park, Tampa, FL</p>
-                <p>First day with the camera and I was welcomed by the gators!</p>
-            </div>
-            </article>
-        </a>
-    </section>
+    <!-- Post 1 -->
+    <a class="post-card" href="post1.html">
+      <img src="imgs/post1imgs/LettucePark.JPG" alt="Post 1 cover">
+      <div class="post-body">
+        <h3 class="post-title">My First Post!</h3>
+        <div class="post-meta">November 6, 2025 • Lettuce Lake Park - Tampa, FL</div>
+        <p class="post-excerpt">
+          First day with the camera and I was welcomed by the gators!
+        </p>
+      </div>
+    </a>
+
+    <!-- Post 2 -->
+    <a class="post-card" href="post2.html">
+      <img src="imgs/post2imgs/Sign.jpg" alt="Post 2 cover">
+      <div class="post-body">
+        <h3 class="post-title">Not the best day but great company... 🤍</h3>
+        <div class="post-meta">November 7, 2025 • Trout Creek Park - Tampa, FL</div>
+        <p class="post-excerpt">
+          Definetly not as many good photos but had company :)
+        </p>
+      </div>
+    </a>
+
+    <!-- Post 3 -->
+    <a class="post-card" href="post3.html">
+      <img src="imgs/post3imgs/USF.JPG" alt="Post 2 cover">
+      <div class="post-body">
+        <h3 class="post-title">Tampa Trough Lenses! </h3>
+        <div class="post-meta">November 8, 2025 • Temple Terrace, FL</div>
+        <p class="post-excerpt">
+          Just a little bit of a day in Temple Terrace.
+        </p>
+      </div>
+    </a>
+
+    <!-- Copy one <a class="post-card">...</a> for posts 3, 4, etc. -->
+
+  </div>
+</section>
+
 
 
   <!-- Footer -->
